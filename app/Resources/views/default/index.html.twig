@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+        {# ... #}
+
+        {# store the prototype on the data-prototype attribute #}
+        <div class="js-members-wrapper"
+  data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}"
+  data-index="{{ form.tags|length }}">
+        {% for tagField in form.tags %}
+             <div class="col-xs-4 js-member-item" >
+                {{ form_errors(tagField) }}
+                {{ form_row(tagField) }}
+            </div>
+        {% endfor %}
+                <a href="#"
+            class="js-member-add">Add another tag</a>
+        </div>
+        <button type="submit" class="btn btn-primary" formnovalidate>Save</button>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{asset('js/add-collection-widget.js')}}"></script>
+{% endblock %}
